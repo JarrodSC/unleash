@@ -11,9 +11,12 @@ import { startOfHour } from 'date-fns';
 import { IConstraint, IStrategyConfig } from '../../../../lib/types/model';
 import { ProxyRepository } from '../../../../lib/proxy/proxy-repository';
 import { FEATURE_UPDATED } from '../../../../lib/types/events';
+import User from '../../../../lib/types/user';
 
 let app: IUnleashTest;
 let db: ITestDb;
+
+const mockUser = new User({ id: 1, email: 'test@example.com' });
 
 beforeAll(async () => {
     db = await dbInit('proxy', getLogger);
@@ -69,6 +72,7 @@ const createFeatureToggle = async ({
             project,
             { name },
             'userName',
+            mockUser,
             true,
         );
     const createdStrategies = await Promise.all(

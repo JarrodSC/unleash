@@ -2,11 +2,13 @@ import dbInit, { ITestDb } from '../../../helpers/database-init';
 import { IUnleashTest, setupAppWithAuth } from '../../../helpers/test-helper';
 import getLogger from '../../../../fixtures/no-logger';
 import { DEFAULT_ENV } from '../../../../../lib/util/constants';
-import { RoleName } from '../../../../../lib/server-impl';
+import { RoleName, User } from '../../../../../lib/server-impl';
 import { CREATE_FEATURE_STRATEGY } from '../../../../../lib/types/permissions';
 
 let app: IUnleashTest;
 let db: ITestDb;
+
+const mockUser = new User({ id: 1, email: 'test@example.com' });
 
 beforeAll(async () => {
     db = await dbInit('feature_strategy_auth_api_serial', getLogger);
@@ -87,6 +89,7 @@ test('Should not be possible auto-enable feature toggle without CREATE_FEATURE_S
         'default',
         { name },
         'me',
+        mockUser,
         true,
     );
 
