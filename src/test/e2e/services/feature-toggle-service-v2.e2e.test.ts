@@ -8,14 +8,11 @@ import User from '../../../lib/types/user';
 import { IConstraint } from '../../../lib/types/model';
 import { AccessService } from '../../../lib/services/access-service';
 import { GroupService } from '../../../lib/services/group-service';
-import AchievementsService from '../../../lib/services/achievements-service';
 
 let stores;
 let db;
 let service: FeatureToggleService;
 let segmentService: SegmentService;
-
-const mockUser = new User({ id: 1, email: 'test@example.com' });
 
 const mockConstraints = (): IConstraint[] => {
     return Array.from({ length: 5 }).map(() => ({
@@ -35,13 +32,11 @@ beforeAll(async () => {
     segmentService = new SegmentService(stores, config);
     const groupService = new GroupService(stores, config);
     const accessService = new AccessService(stores, config, groupService);
-    const achievementsService = new AchievementsService(stores, config);
     service = new FeatureToggleService(
         stores,
         config,
         segmentService,
         accessService,
-        achievementsService,
     );
 });
 
@@ -64,7 +59,6 @@ test('Should create feature toggle strategy configuration', async () => {
             name: 'Demo',
         },
         'test',
-        mockUser,
     );
 
     const createdConfig = await service.createStrategy(
@@ -93,7 +87,6 @@ test('Should be able to update existing strategy configuration', async () => {
             name: featureName,
         },
         'test',
-        mockUser,
     );
 
     const createdConfig = await service.createStrategy(
@@ -128,7 +121,6 @@ test('Should be able to get strategy by id', async () => {
             name: featureName,
         },
         userName,
-        mockUser,
     );
 
     const createdConfig = await service.createStrategy(
@@ -154,7 +146,6 @@ test('should ignore name in the body when updating feature toggle', async () => 
             description: 'First toggle',
         },
         userName,
-        mockUser,
     );
 
     await service.createFeatureToggle(
@@ -164,7 +155,6 @@ test('should ignore name in the body when updating feature toggle', async () => 
             description: 'Second toggle',
         },
         userName,
-        mockUser,
     );
 
     const update = {
@@ -192,7 +182,6 @@ test('should not get empty rows as features', async () => {
             description: 'First toggle',
         },
         userName,
-        mockUser,
     );
 
     await service.createFeatureToggle(
@@ -202,7 +191,6 @@ test('should not get empty rows as features', async () => {
             description: 'Second toggle',
         },
         userName,
-        mockUser,
     );
 
     const user = { email: 'test@example.com' } as User;
