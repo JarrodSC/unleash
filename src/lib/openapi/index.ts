@@ -1,5 +1,6 @@
 import { OpenAPIV3 } from 'openapi-types';
 import { achievementSchema } from './spec/achievement-schema';
+import { achievementUnlockSchema } from './spec/achievement-unlock-schema';
 import { achievementsSchema } from './spec/achievements-schema';
 import { addonParameterSchema } from './spec/addon-parameter-schema';
 import { addonSchema } from './spec/addon-schema';
@@ -129,6 +130,7 @@ import apiVersion from '../util/version';
 // All schemas in `openapi/spec` should be listed here.
 export const schemas = {
     achievementSchema,
+    achievementUnlockSchema,
     achievementsSchema,
     addonParameterSchema,
     addonSchema,
