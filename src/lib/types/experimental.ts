@@ -38,6 +38,10 @@ export const defaultExperimentalOptions = {
             process.env.UNLEASH_EXPERIMENTAL_CLONE_ENVIRONMENT,
             false,
         ),
+        achievements: parseEnvVarBoolean(
+            process.env.UNLEASH_EXPERIMENTAL_ACHIEVEMENTS,
+            false,
+        ),
     },
     externalResolver: { isEnabled: (): boolean => false },
 };
@@ -53,6 +57,7 @@ export interface IExperimentalOptions {
         syncSSOGroups?: boolean;
         changeRequests?: boolean;
         cloneEnvironment?: boolean;
+        achievements?: boolean;
     };
     externalResolver: IExternalFlagResolver;
 }

@@ -44,6 +44,7 @@ export interface IFlags {
     syncSSOGroups?: boolean;
     changeRequests?: boolean;
     cloneEnvironment?: boolean;
+    achievements?: boolean;
 }
 
 export interface IVersionInfo {
